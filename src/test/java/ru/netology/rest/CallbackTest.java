@@ -17,17 +17,17 @@ public class CallbackTest {
     void shouldSubmitRequest(){
         open("http://localhost:9999");
 
-        SelenideElement form= $("[data-test-id=name]");
-        form.$(".input__control").setValue("Василий");
+        SelenideElement form = $(".form");
 
-        form= $("[data-test-id=phone]");
-        form.$(".input__control").setValue("+79270000000");
+        form.$("[data-test-id=name] .input__control").setValue("Василий Пупкин");
 
-        form= $("[data-test-id=agreement]");
-        form.$(".checkbox__box").click();
+        form.$("[data-test-id=phone] .input__control").setValue("+79270000000");
 
-        $("[role=button]").click();
+        form.$("[data-test-id=agreement]").click();
+        form.$("[role=button]").click();
 
-        $("[data-test-id=order-success]").shouldHave(exactText("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+        $("[data-test-id=order-success]").shouldHave(exactText(
+                "  Ваша заявка успешно отправлена! "
+                        + "Наш менеджер свяжется с вами в ближайшее время."));
     }
 }
